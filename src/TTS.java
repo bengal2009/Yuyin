@@ -35,19 +35,20 @@ public class TTS {
         params.put("ctp", 1);
         params.put("cuid", cuid);
 
-
         // add request header
-        conn.setRequestMethod("POST");
-        conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+                conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "audio/mp3; charset=utf-8");
 
         conn.setDoInput(true);
         conn.setDoOutput(true);
-
+//        File f = new File("C://temp.txt");·j¯ÁURL MyURL = new URL("http://www.yahoo.cn");InputStream inputstream = MyURL.openStream();DataInputStream din = new DataInputStream(inputstream);BufferedWriter target = new BufferedWriter(new FileWriter(f));output = din.readUTF();target.write(output);target.close();din.close();
         // send request
-        DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
-        wr.writeBytes(params.toString());
-        wr.flush();
-        wr.close();
+        DataOutputStream RD = new DataOutputStream(conn.getOutputStream());
+        RD.writeBytes(params.toString());
+        RD.close();
+
+    }
+    private static void method2() throws Exception {
 
     }
     private static void getToken() throws Exception {

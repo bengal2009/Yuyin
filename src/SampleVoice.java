@@ -52,10 +52,10 @@ public class SampleVoice {
         conn.setDoOutput(true);
 
         // send request
-        DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
-        wr.writeBytes(params.toString());
+        DataInputStream RD = new DataInputStream(conn.getInputStream());
+        /*wr.writeBytes(params.toString());
         wr.flush();
-        wr.close();
+        wr.close();*/
 
         printResponse(conn);
     }
@@ -80,6 +80,7 @@ public class SampleVoice {
 
         printResponse(conn);
     }
+
 
     private static String printResponse(HttpURLConnection conn) throws Exception {
         if (conn.getResponseCode() != 200) {
