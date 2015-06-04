@@ -9,7 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 public class SampleVoice {
 
-    private static final String serverURL = "http://vop.baidu.com/server_api";
+    private static final String serverURL = "http://tsn.baidu.com/text2audio";
     private static String token = "";
     private static final String testFileName = "C:\\Users\\Lin\\IdeaProjects\\Yuyin\\out\\production\\Yuyin\\1.amr";
     //put your own params here
