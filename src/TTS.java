@@ -1,9 +1,6 @@
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -13,7 +10,7 @@ import java.net.URL;
 public class TTS {
     private static final String serverURL = "http://vop.baidu.com/server_api";
     private static String token = "";
-//    private static final String testFileName = "C:\\Users\\Lin\\IdeaProjects\\Yuyin\\out\\production\\Yuyin\\1.amr";
+    private static final String testFileName = "C:\\Users\\Lin\\IdeaProjects\\Yuyin\\out\\production\\Yuyin\\1.MP3";
     //put your own params here
     private static final String apiKey = "bd6kSzmqtlUaG1SEjbqR4R28";
     private static final String secretKey = "5eaad29500bcbd35c84bf6bfac5e9190";
@@ -49,7 +46,24 @@ public class TTS {
 
     }
     private static void method2() throws Exception {
+        File pcmFile = new File(testFileName);
+        HttpURLConnection conn = (HttpURLConnection) new URL(serverURL
+                + "?cuid=" + cuid + "&token=" + token).openConnection();
 
+        // add request header
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "audio/amr; rate=8000");
+
+        conn.setDoInput(true);
+        conn.setDoOutput(true);
+
+        // send request
+        DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
+//        wr.write(WriteFile(pcmFile));
+        wr.flush();
+        wr.close();
+
+        printResponse(conn);
     }
     private static void getToken() throws Exception {
         String getTokenURL = "https://openapi.baidu.com/oauth/2.0/token?grant_type=client_credentials" +
@@ -74,5 +88,25 @@ public class TTS {
         rd.close();
         System.out.println(new JSONObject(response.toString()).toString(4));
         return response.toString();
+    }
+    private static void WriteFile(File file) throws IOException {
+        InputStream is = new FileInputStream(file);
+
+        long length = file.length();
+        byte[] bytes = new byte[(int) length];
+
+        int offset = 0;
+        int numRead = 0;
+        while (offset < bytes.length
+                && (numRead = is.read(bytes, offset, bytes.length - offset)) >= 0) {
+            offset += numRead;
+        }
+
+        if (offset < bytes.length) {
+            is.close();
+            throw new IOException("Could not completely read file " + file.getName());
+        }
+
+        is.close();
     }
 }

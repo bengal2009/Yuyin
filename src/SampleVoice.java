@@ -1,21 +1,20 @@
-/**
- * Created by Lin on 2015/6/4.
- */
+
 import org.json.JSONObject;
 
 import javax.xml.bind.DatatypeConverter;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
 public class SampleVoice {
 
-    private static final String serverURL = "http://tsn.baidu.com/text2audio";
+    private static final String serverURL = "http://vop.baidu.com/server_api";
     private static String token = "";
-    private static final String testFileName = "C:\\Users\\Lin\\IdeaProjects\\Yuyin\\out\\production\\Yuyin\\1.amr";
+    private static final String testFileName = "C:\\Users\\Lin\\IdeaProjects\\Yuyin\\out\\production\\Yuyin\\test.pcm";
     //put your own params here
-    private static final String apiKey = "bd6kSzmqtlUaG1SEjbqR4R28";
-    private static final String secretKey = "5eaad29500bcbd35c84bf6bfac5e9190";
-    private static final String cuid = "6131442";
+    private static final String apiKey ="bd6kSzmqtlUaG1SEjbqR4R28";
+    private static final String secretKey ="5eaad29500bcbd35c84bf6bfac5e9190";
+    private static final String cuid ="6131442";
 
     public static void main(String[] args) throws Exception {
         getToken();
@@ -36,7 +35,7 @@ public class SampleVoice {
 
         // construct params
         JSONObject params = new JSONObject();
-        params.put("format", "amr");
+        params.put("format", "pcm");
         params.put("rate", 8000);
         params.put("channel", "1");
         params.put("token", token);
@@ -52,10 +51,10 @@ public class SampleVoice {
         conn.setDoOutput(true);
 
         // send request
-        DataInputStream RD = new DataInputStream(conn.getInputStream());
-        /*wr.writeBytes(params.toString());
+        DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
+        wr.writeBytes(params.toString());
         wr.flush();
-        wr.close();*/
+        wr.close();
 
         printResponse(conn);
     }
@@ -67,7 +66,7 @@ public class SampleVoice {
 
         // add request header
         conn.setRequestMethod("POST");
-        conn.setRequestProperty("Content-Type", "audio/amr; rate=8000");
+        conn.setRequestProperty("Content-Type", "audio/pcm; rate=8000");
 
         conn.setDoInput(true);
         conn.setDoOutput(true);
@@ -80,7 +79,6 @@ public class SampleVoice {
 
         printResponse(conn);
     }
-
 
     private static String printResponse(HttpURLConnection conn) throws Exception {
         if (conn.getResponseCode() != 200) {

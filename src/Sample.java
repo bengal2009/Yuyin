@@ -13,7 +13,7 @@ public class Sample {
 
     private static final String serverURL = "http://vop.baidu.com/server_api";
     private static String token = "";
-    private static final String testFileName = "C:\\Users\\Lin\\IdeaProjects\\Yuyin\\out\\production\\Yuyin\\1.amr";
+    private static final String testFileName = "C:\\Users\\Lin\\IdeaProjects\\Yuyin\\out\\production\\Yuyin\\test.pcm";
     //put your own params here
     private static final String apiKey = "bd6kSzmqtlUaG1SEjbqR4R28";
     private static final String secretKey = "5eaad29500bcbd35c84bf6bfac5e9190";
@@ -70,7 +70,7 @@ public class Sample {
 
         // add request header
         conn.setRequestMethod("POST");
-        conn.setRequestProperty("Content-Type", "audio/amr; rate=8000");
+        conn.setRequestProperty("Content-Type", "audio/pcm; rate=8000");
 
         conn.setDoInput(true);
         conn.setDoOutput(true);
