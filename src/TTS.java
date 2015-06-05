@@ -23,7 +23,7 @@ public class TTS {
 
     private static void method1() throws Exception {
         HttpURLConnection conn = (HttpURLConnection) new URL(serverURL).openConnection();
-
+        File mp3File = new File(testFileName);
         // construct params
         JSONObject params = new JSONObject();
         params.put("tex", "Hello");
@@ -40,10 +40,9 @@ public class TTS {
         conn.setDoOutput(true);
 //        File f = new File("C://temp.txt");·j¯ÁURL MyURL = new URL("http://www.yahoo.cn");InputStream inputstream = MyURL.openStream();DataInputStream din = new DataInputStream(inputstream);BufferedWriter target = new BufferedWriter(new FileWriter(f));output = din.readUTF();target.write(output);target.close();din.close();
         // send request
-        DataOutputStream RD = new DataOutputStream(conn.getOutputStream());
-        RD.writeBytes(params.toString());
-        RD.close();
-
+        DataInputStream WR = new DataInputStream(conn.getInputStream());
+        WR.close();
+        printResponse(conn);
     }
     private static void method2() throws Exception {
         File pcmFile = new File(testFileName);
