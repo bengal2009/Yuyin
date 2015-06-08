@@ -20,7 +20,15 @@ public class TestEncode {
 //        System.out.println(URLEncoder.encode("????", "GBK"));
         System.out.println(URLEncoder.encode("?在??", "utf-8"));
         System.out.println(URLEncoder.encode("?在??", "utf-8"));
-        A1();
+//        A1();
+        String chinese = "中文";//java?部??
+        String gbkChinese = new String(chinese.getBytes("GBK"),"ISO-8859-1");//??成gbk??
+        String unicodeChinese = new String(gbkChinese.getBytes("ISO-8859-1"),"GBK");//java?部??
+        System.out.println(URLEncoder.encode(unicodeChinese,"utf-8"));//中文
+        String utf8Chinese = new String(unicodeChinese.getBytes("UTF-8"),"ISO-8859-1");//utf--8??
+        System.out.println(URLEncoder.encode(utf8Chinese,"utf-8"));//??
+        unicodeChinese = new String(utf8Chinese.getBytes("ISO-8859-1"),"UTF-8");//java?部??
+        System.out.println(unicodeChinese);//中文
 
     }
     public static  void  A1()

@@ -43,7 +43,8 @@ public class TTS {
         String urlParameters =
 //                "tex=" + URLEncoder.encode("你好", "BIG5") +
 
-                        "tex="  +URLEncoder.encode("如果合成功， 如果合成功， 如果合成功， 如果合成功， 下行?据?二?制?音文件，具体 下行?据?二?制?音文件，具体 下行?据?二?制?音文件，具体 下行?据?二?制?音文件，具体 下行?据?二?制?音文件，具体 下行?据?二?制?音文件，具体 下行?据?二?制?音文件，具体", "utf-8") +
+                        "tex="  +"%e7%8e%b0%e5%9c%a8%e6%97%b6%e9%97%b4"+
+                                URLEncoder.encode("1:40", "utf-8") +
                         "&cuid=" + cuid +
                         "&ctp=1"+"&tok="+token+"&lan=zh";
 //        tex=你好&cuid=xxx&ctp=1&tok=24.c5e6897f4ff7b0af2303baf572fcc56e.2592000.1428462020.282335-288453
