@@ -8,7 +8,7 @@ import java.net.URLEncoder;
 public class TestEncode {
     public static void main(String[] args) throws Exception {
         //%e7%8e%b0%e5%9c%a8%e6%97%b6%e9%97%b4
-        String s1="???";
+        String s1="????";
         String s2;
         s1=new String(s1.getBytes("gb2312"),"utf-8");
 
@@ -18,17 +18,17 @@ public class TestEncode {
 //     System.out.println(URLEncoder.encode(s1, "GBK"));
         System.out.println("22222");
 //        System.out.println(URLEncoder.encode("????", "GBK"));
-        System.out.println(URLEncoder.encode("???", "utf-8"));
-        System.out.println(URLEncoder.encode("???", "utf-8"));
+        System.out.println(URLEncoder.encode("????", "utf-8"));
+        System.out.println(URLEncoder.encode("????", "utf-8"));
 //        A1();
-        String chinese = "いゅ";//java?场??
-        String gbkChinese = new String(chinese.getBytes("GBK"),"ISO-8859-1");//??Θgbk??
-        String unicodeChinese = new String(gbkChinese.getBytes("ISO-8859-1"),"GBK");//java?场??
-        System.out.println(URLEncoder.encode(unicodeChinese,"utf-8"));//いゅ
+        String chinese = "???";//java?场??
+        String gbkChinese = new String(chinese.getBytes("GBK"),"ISO-8859-1");//???gbk??
+        String unicodeChinese = new String(gbkChinese.getBytes("ISO-8859-1"),"GBK");//java????
+        System.out.println(URLEncoder.encode(unicodeChinese,"utf-8"));//??
         String utf8Chinese = new String(unicodeChinese.getBytes("UTF-8"),"ISO-8859-1");//utf--8??
         System.out.println(URLEncoder.encode(utf8Chinese,"utf-8"));//??
-        unicodeChinese = new String(utf8Chinese.getBytes("ISO-8859-1"),"UTF-8");//java?场??
-        System.out.println(unicodeChinese);//いゅ
+        unicodeChinese = new String(utf8Chinese.getBytes("ISO-8859-1"),"UTF-8");//java????
+        System.out.println(unicodeChinese);//??
 
     }
     public static  void  A1()
@@ -36,7 +36,7 @@ public class TestEncode {
         final String ENCODING = "UTF-8";
 
         try {
-            String queryString = "a=" + URLEncoder.encode("???", ENCODING) ;
+            String queryString = "a=" + URLEncoder.encode("????", ENCODING) ;
 
 
             URI uri = new URI("http", null, "example.com", -1, "/accounts", queryString, null);

@@ -4,9 +4,13 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Lin on 2015/6/4.
+ * http://tool.chinaz.com/Tools/URLEncode.aspx
  */
 public class TTS {
 //    private static final String serverURL = "http://tsn.baidu.com/text2audio";
@@ -40,11 +44,17 @@ public class TTS {
     private static void method3() throws Exception {
         HttpURLConnection conn = (HttpURLConnection) new URL("http://tsn.baidu.com/text2audio").openConnection();
         String USER_AGENT = "Mozilla/5.0";
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+        DateFormat dateFormat1 = new SimpleDateFormat("yyyy/MM/dd");
+        Date date = new Date();
+//        System.out.println(dateFormat.format(date)); //2014/08/06 15:59:48
         String urlParameters =
 //                "tex=" + URLEncoder.encode("你好", "BIG5") +
-
-                        "tex="  +"%e7%8e%b0%e5%9c%a8%e6%97%b6%e9%97%b4"+
-                                URLEncoder.encode("1:40", "utf-8") +
+                "tex="  +"%e4%bb%8a%e5%a4%a9%e6%98%af"+
+                        URLEncoder.encode(dateFormat1.format(date), "utf-8")+
+                        /*"tex="  +"%e7%8e%b0%e5%9c%a8%e6%97%b6%e9%97%b4"+
+                                URLEncoder.encode(dateFormat.format(date), "utf-8") +*/
+//                "tex="+ConvUrl("?在??")+
                         "&cuid=" + cuid +
                         "&ctp=1"+"&tok="+token+"&lan=zh";
 //        tex=你好&cuid=xxx&ctp=1&tok=24.c5e6897f4ff7b0af2303baf572fcc56e.2592000.1428462020.282335-288453
@@ -235,5 +245,21 @@ public class TTS {
         }
 
         is.close();
+    }
+    private static String ConvUrl(String chinese)
+    {
+//        String chinese = "中文";//java?部??
+        try {
+            String gbkChinese = new String(chinese.getBytes("gbk"), "ISO-8859-1");//??成gbk??
+            String unicodeChinese = new String(gbkChinese.getBytes("ISO-8859-1"), "GBK");//java?部??
+        System.out.println("Test:"+URLEncoder.encode(unicodeChinese,"utf-8"));//中文
+
+            return URLEncoder.encode(unicodeChinese,"utf-8");
+        }
+        catch (Exception E)
+        {
+            System.out.println(E.toString());
+        }
+        return null;
     }
 }
