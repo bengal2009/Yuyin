@@ -1,4 +1,13 @@
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Lin on 2015/7/17.
@@ -22,6 +31,8 @@ public class HashTest {
         for (String name:T1.keySet()) {
             System.out.println(name);
         }
+//        ReadStrFile();
+        ReadFileByLine();
     }
     public static byte[] hexStringToBytes(String hexString) {
         if (hexString == null || hexString.equals("")) {
@@ -62,8 +73,40 @@ public class HashTest {
         }
         return rawData;
     }
-    void ReadStrFile()
+    private static void  ReadFileByLine()
     {
+
+        try {
+            List<String> testlines = Files.readAllLines(Paths.get("c:\\2.txt"),
+                    StandardCharsets.UTF_8);
+            for (String linestr : testlines) {
+                System.out.println(linestr);
+            }
+        }catch (Exception E)
+        {
+
+        }
+
+    }
+    private static  void ReadStrFile()
+    {
+        String line;
+        try
+        {
+                InputStream fis = new FileInputStream("c:\\2.txt");
+                InputStreamReader isr = new InputStreamReader(fis, Charset.forName("UTF-8"));
+                BufferedReader br = new BufferedReader(isr);
+
+            while ((line = br.readLine()) != null) {
+                // Deal with the line
+                System.out.println(line);
+            }
+        }catch (Exception E)
+        {
+
+        }
+
+
 
     }
 }
